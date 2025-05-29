@@ -8,7 +8,7 @@ const Loreams = () => {
     };
 
     return (
-        <div className="max-w-[450px] mx-auto p-4 border rounded-lg shadow-md bg-white dark:bg-gray-900">
+        <div className="max-w-[450px] mx-auto p-4 border rounded-lg shadow-md bg-white dark:bg-gray-900 hidden sm:block">
             <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Equity + F&amp;O</h2>
             <ul className="list-disc pl-5 text-gray-700 dark:text-gray-300 space-y-2">
                 <li>Weekly 0-5 Equity Tips for Swing Trades</li>

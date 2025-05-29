@@ -1,108 +1,87 @@
-import React, { use } from "react";
-import { useNavigate } from "react-router";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
 const Card = () => {
   const navigate = useNavigate();
+
   const handlePress = () => {
     navigate("/login");
   };
+
   const plans = [
     {
       price: "80",
       title: "Base",
       highlight: false,
-      description: "For most businesses that want to optimize web queries",
       button: "Downgrade",
-      bgColor: "bg-white dark:bg-gray-800",
-      textColor: "text-gray-900 dark:text-white",
-      buttonColor:
-        "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600",
-      descColor: "text-gray-600 dark:text-gray-400",
     },
     {
       price: "120",
       title: "Pro",
       highlight: true,
       badge: "Most Popular",
-      description: "For most businesses that want to optimize web queries",
       button: "Upgrade",
-      bgColor: "bg-indigo-500 dark:bg-indigo-600",
-      textColor: "text-white",
-      buttonColor:
-        "bg-white text-indigo-500 hover:bg-gray-50 dark:bg-gray-100 dark:text-indigo-600 dark:hover:bg-gray-200",
-      subTextColor: "text-indigo-100 dark:text-indigo-200",
-      descColor: "text-indigo-100 dark:text-indigo-200",
     },
     {
       price: "260",
       title: "Enterprise",
       highlight: false,
-      description: "For most businesses that want to optimize web queries",
       button: "Upgrade",
-      bgColor: "bg-white dark:bg-gray-800",
-      textColor: "text-gray-900 dark:text-white",
-      buttonColor:
-        "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600",
-      descColor: "text-gray-600 dark:text-gray-400",
     },
   ];
 
   return (
-    <div className="min-h-screen dark:bg-gray-900 p-4 sm:p-6">
-      <div className="container mx-auto pt-8 sm:pt-32">
-        <h2 className="text-gray-900 dark:text-white text-3xl mb-2 font-bold tracking-wide text-center">
-          Simple, transparent pricing
+    <div className="min-h-screen dark:bg-gray-900 py-16 px-4 sm:px-6 lg:pt-[150px]">
+      {/* Heading - show only on large (lg) screens */}
+      <div className="text-center mb-14 hidden lg:block">
+        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">
+          Simple, Transparent Pricing
         </h2>
-        <p className="text-gray-500 dark:text-gray-400 text-base mb-12 text-center">
-          No contracts. No surprise fees.
+        <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+          No contracts. No hidden fees. Cancel anytime.
         </p>
       </div>
 
-      <div className="container mx-auto flex flex-col lg:flex-row gap-6 max-w-6xl items-stretch justify-center">
-        {plans.map((plan, index) => (
-          <div
-            key={index}
-            className={`${plan.bgColor} rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 flex flex-col justify-between w-full lg:w-80 relative transition-transform hover:scale-105`}
-          >
-            <div>
-              {plan.highlight && plan.badge && (
-                <span className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-indigo-600 dark:bg-indigo-500 text-white text-xs font-semibold rounded-full px-4 py-1">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 px-[20px] sm:px-[0px] justify-center items-stretch">
+        {plans.map((plan, index) => {
+          const isHighlight = plan.highlight;
+
+          return (
+            <div
+              key={index}
+              className={`relative w-full max-w-md mx-auto rounded-3xl shadow-xl p-8 flex flex-col justify-between transition-transform transform hover:scale-105 duration-300 ${
+                isHighlight
+                  ? "bg-indigo-600 text-white"
+                  : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              }`}
+            >
+              {isHighlight && plan.badge && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 text-sm font-semibold rounded-full shadow-lg">
                   {plan.badge}
-                </span>
+                </div>
               )}
 
-              <div className="text-center mb-6">
-                <div className={`text-4xl font-bold ${plan.textColor} mb-1`}>
+              <div className="text-center">
+                <h3 className="text-2xl font-semibold mb-2">{plan.title}</h3>
+                <div className="text-5xl font-bold mb-1">
                   ${plan.price}
-                  <span
-                    className={`text-lg font-normal ${
-                      plan.subTextColor || "text-gray-500 dark:text-gray-400"
-                    }`}
-                  >
-                    /month
-                  </span>
+                  <span className="text-base font-medium">/month</span>
                 </div>
-
-                <h3 className={`text-xl font-semibold ${plan.textColor} mb-3`}>
-                  {plan.title}
-                </h3>
-
-                <p
-                  className={`text-sm ${
-                    plan.descColor || "text-gray-600 dark:text-gray-400"
-                  }`}
-                >
-                  {plan.description}
-                </p>
               </div>
+
+              <button
+                onClick={handlePress}
+                className={`mt-6 w-full py-3 rounded-xl font-semibold transition ${
+                  isHighlight
+                    ? "bg-white text-indigo-700 hover:bg-gray-100"
+                    : "bg-indigo-600 text-white hover:bg-indigo-700"
+                }`}
+              >
+                {plan.button || "Choose Plan"}
+              </button>
             </div>
-            <button
-              className={`w-full text-sm font-medium rounded-lg py-3 px-4 transition-colors ${plan.buttonColor}`}
-              onClick={handlePress}
-            >
-              {plan.button}
-            </button>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../services/action/user.action";
+// import { useDispatch } from "react-redux";
+// import { addUser } from "../../services/action/user.action";
 function Login() {
   const [phone, setPhone] = useState("");
   const [darkMode, setDarkMode] = useState(false);
